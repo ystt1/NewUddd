@@ -176,4 +176,16 @@ public class CateItemDAO {
         }
         return list;
     }
+
+    public int getMaxId()
+    {
+        database=sqlHelper.getReadableDatabase();
+        Cursor cursor=database.rawQuery("Select Max(id) from CateItem",null);
+        if(cursor.getCount()>0)
+        {
+            cursor.moveToFirst();
+            return cursor.getInt(0);
+        }
+        return -1;
+    }
 }
