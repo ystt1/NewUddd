@@ -96,4 +96,24 @@ public class CateDAO {
 
         return list;
     }
+
+    public ArrayList<AllCate> getListCateBelowBanner()
+    {
+        ArrayList<AllCate> list=new ArrayList<>();
+        database=sqlHelper.getReadableDatabase();
+
+        Cursor cursor=database.rawQuery("SELECT * FROM Category LIMIT 10 OFFSET 3;",null);
+        if(cursor.getCount()>0)
+        {
+
+            cursor.moveToFirst();
+            do{
+                list.add(new AllCate(cursor.getInt(0),
+                        cursor.getString(1)
+                ));
+            }while (cursor.moveToNext());
+        }
+
+        return list;
+    }
 }

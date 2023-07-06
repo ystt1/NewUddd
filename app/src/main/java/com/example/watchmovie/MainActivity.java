@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     List<AllCate> cateListForBanner=new ArrayList<>();
 
     List<CateItem> bannerListItem=new ArrayList<>();
-    AllCate cateListBelow;
+    List<AllCate> cateListBelow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,9 +101,10 @@ public class MainActivity extends AppCompatActivity {
         homeCateItemList=cateItemDAO.getListCateItem();
         cateListForBanner.clear();
         cateListForBanner=cateDAO.getListCateForBanner();
+        cateListBelow=cateDAO.getListCateBelowBanner();
         setBanner();
         onChangeBannerTab();
-
+        setMainRecyclerView(cateListBelow);
 
 
 
@@ -129,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         cateList1.clear();
         cateDAO=new CateDAO(context);
         cateList1=cateDAO.getListCate();
-        setMainRecyclerView(cateList1);
+        //setMainRecyclerView(cateList1);
 
 
         imgMenu.setOnClickListener(new View.OnClickListener() {
@@ -288,12 +289,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void setMainRecyclerView(List<AllCate> cateList1)
+    public void setMainRecyclerView(List<AllCate> cateListBelow)
     {
         mainRecyclerView =findViewById(R.id.recycle_main);
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
         mainRecyclerView.setLayoutManager(layoutManager);
-        mainRecycleAdapter=new MainRecycleAdapter(this,cateList1);
+        mainRecycleAdapter=new MainRecycleAdapter(this,cateListBelow);
         mainRecyclerView.setAdapter(mainRecycleAdapter);
     }
 
