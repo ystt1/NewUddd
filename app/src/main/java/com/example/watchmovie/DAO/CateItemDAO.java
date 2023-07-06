@@ -154,4 +154,26 @@ public class CateItemDAO {
                 new String[]{String.valueOf(cateItem.getId())});
         return check;
     }
+
+    public ArrayList<CateItem> getListCateItemWithCateId(int id)
+    {
+        ArrayList<CateItem> list=new ArrayList<>();
+        database=sqlHelper.getReadableDatabase();
+        Cursor cursor=database.rawQuery("SELECT * from CateItem WHERE idCate="+id,null);
+        if(cursor.getCount()>0)
+        {
+
+            cursor.moveToFirst();
+            do{
+                list.add(new CateItem(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getInt(4),
+                        cursor.getInt(5)
+                ));
+            }while (cursor.moveToNext());
+        }
+        return list;
+    }
 }
