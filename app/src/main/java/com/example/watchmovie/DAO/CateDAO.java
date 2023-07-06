@@ -76,4 +76,24 @@ public class CateDAO {
         values.put("cateTitle",name);
         long check=database.insert("Category",null,values);
     }
+
+    public ArrayList<AllCate> getListCateForBanner()
+    {
+        ArrayList<AllCate> list=new ArrayList<>();
+        database=sqlHelper.getReadableDatabase();
+
+        Cursor cursor=database.rawQuery("Select * from Category Limit 3",null);
+        if(cursor.getCount()>0)
+        {
+
+            cursor.moveToFirst();
+            do{
+                list.add(new AllCate(cursor.getInt(0),
+                        cursor.getString(1)
+                ));
+            }while (cursor.moveToNext());
+        }
+
+        return list;
+    }
 }
