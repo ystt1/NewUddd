@@ -188,4 +188,26 @@ public class CateItemDAO {
         }
         return -1;
     }
+
+    public ArrayList<CateItem> getListItemYeuThich()
+    {
+        ArrayList<CateItem> list=new ArrayList<>();
+        database=sqlHelper.getReadableDatabase();
+        Cursor cursor=database.rawQuery("SELECT * from CateItem WHERE yeuThich=1",null);
+        if(cursor.getCount()>0)
+        {
+
+            cursor.moveToFirst();
+            do{
+                list.add(new CateItem(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getInt(4),
+                        cursor.getInt(5)
+                ));
+            }while (cursor.moveToNext());
+        }
+        return list;
+    }
 }
