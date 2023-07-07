@@ -17,7 +17,7 @@ import java.io.ByteArrayOutputStream;
 public class SQLHelper extends SQLiteOpenHelper {
     Context context;
     public SQLHelper( Context context) {
-        super(context, "ToDoDB", null, 3);
+        super(context, "test", null, 1);
     }
 
 
@@ -48,6 +48,7 @@ public class SQLHelper extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS AnhBia");
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Category");
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS CateItem");
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS User");
             onCreate(sqLiteDatabase);
         }
     }
