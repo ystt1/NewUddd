@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.watchmovie.model.AllCate;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CateDAO {
 
@@ -106,6 +107,25 @@ public class CateDAO {
         if(cursor.getCount()>0)
         {
 
+            cursor.moveToFirst();
+            do{
+                list.add(new AllCate(cursor.getInt(0),
+                        cursor.getString(1)
+                ));
+            }while (cursor.moveToNext());
+        }
+
+        return list;
+    }
+
+    public List<AllCate> searchCate(String key)
+    {
+        ArrayList<AllCate> list=new ArrayList<>();
+        database=sqlHelper.getReadableDatabase();
+
+        Cursor cursor=database.rawQuery("SELECT * from Category WHERE cateTitle like \"%"+key+"%\"",null);
+        if(cursor.getCount()>0)
+        {
             cursor.moveToFirst();
             do{
                 list.add(new AllCate(cursor.getInt(0),
