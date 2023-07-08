@@ -92,4 +92,28 @@ public class UserDAO {
         }
         return -1;
     }
+
+    public long createUser(User user)
+    {
+        database=sqlHelper.getReadableDatabase();
+
+        Cursor cursor=database.rawQuery("SELECT id FROM User WHERE userName=\""+user.getUserName()+"\" or displayName=\""+user.getDisplayName()+"\"",null);
+        if(cursor.getCount()>0)
+        {
+            return -1;
+        }
+        return addUser(user);
+    }
+
+    public int getMaxId()
+    {
+        database=sqlHelper.getReadableDatabase();
+        Cursor cursor=database.rawQuery("Select Max(id) from User",null);
+        if(cursor.getCount()>0)
+        {
+            cursor.moveToFirst();
+            return cursor.getInt(0);
+        }
+        return -1;
+    }
 }

@@ -49,6 +49,7 @@ public class Log_Fragment extends Fragment {
                     if(id!=-1)
                     {
                         Intent i=new Intent(requireContext(), MainActivity.class);
+                        i.putExtra("id",id);
                         startActivity(i);
                     }
                     else {
